@@ -13,7 +13,7 @@ class notes extends Controller
     public function consultation($id_User){
         return response()
             ->json(
-                notesmodel::where('id_User','=',$id_User)
+                notesmodel::where('id_User','=',$id_User)->join('matiere', 'notes.id_matiere', '=', 'matiere.id_matiere')
                     ->get(),
                 '200'
             );
