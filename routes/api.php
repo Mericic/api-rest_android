@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/consultation/{id_User}', 'notes@consultation');
-Route::get('/ajout/{id_User}', 'notes@ajout');
-Route::get('/suppression/{id_Note}', 'notes@suppression');
-Route::get('/modfication/{id_Note}', 'notes@modfication');
+Route::get('/show/{id_user}', 'ControllerNotes@show');
+Route::post('/add/{id_user}', 'ControllerNotes@add');
+Route::get('/delete/{id_note}', 'ControllerNotes@delete');
+Route::get('/update/{id_note}', 'ControllerNotes@update');
