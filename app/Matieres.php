@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notes extends Model
+class Matieres extends Model
 {
-    protected $table = 'notes';
+    protected $table = 'matieres';
 
 
+    
 }

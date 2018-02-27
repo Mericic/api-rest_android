@@ -21,3 +21,4 @@ Route::get('/show/{id_user}', 'ControllerNotes@show');
 Route::post('/add/{id_user}', 'ControllerNotes@add');
 Route::get('/delete/{id_note}', 'ControllerNotes@delete');
 Route::get('/update/{id_note}', 'ControllerNotes@update');
+Route::get('/matieres', 'ControllerNotes@matieres');
