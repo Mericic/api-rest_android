@@ -13,7 +13,7 @@ class ControllerNotes extends Controller
 
         return response()
             ->json(
-                Notes::find($id_user)->join('matieres', 'notes.id_matiere', '=', 'matieres.id')
+                Notes::where('id_user', $id_user)->join('matieres', 'notes.id_matiere', '=', 'matieres.id')
                     ->get(),
                 '200'
             );
@@ -22,7 +22,7 @@ class ControllerNotes extends Controller
     public function add(Request $request, $id_user){
 
        $note = new Notes();
-       $note->id = $id_user;
+       $note->id_user = $id_user;
        $note->id_matiere = $request -> matiere;
        $note->coeff = $request -> coeff;
        $note->quotient = $request -> quotient;
@@ -37,24 +37,31 @@ class ControllerNotes extends Controller
     }
 
     public function delete($id_note){
-        $note = Notes::find($id_note);
-        $note->delete();
-        return 'supression'.$id_note;
+        $note = Notes::where('id_note', $id_note)->delete();
+
+                return response()
+                ->json(
+                   ['succeed' => true]
+                 );
     }
 
-    public function update(Request $request,$id_note){
-        $note = Notes::find($id_note);
-        $note->id_user = $request -> id_user;
+    public function update(Request $request, $id_note){
 
-        $nom_matiere = Matieres::select("id_matiere")->where("nom_matiere", $request-> nom_matiere)->first();
-        $note->id_matiere = Matieres::select("id_matiere")->where("nom_matiere", $nom_matiere)->first();
-        $note->coef = $request -> coef;
-        $note->quotient = $request -> quotient;
-        $note->note = $request -> note;
+        $note = Notes::where('id_note', $id_note)->update(
+                       array(
+                             "id_matiere" => $request-> matiere  ,
+                             "coeff" =>  $request -> coeff,
+                             "quotient" =>  $request -> quotient,
+                             "note" =>  $request -> note
+                             )
+                       );
 
 
+        return response()
+        ->json(
+           ['succeed' => true]
+         );
 
-        return $note->save();
     }
 
     public function matieres(){
