@@ -10,7 +10,6 @@ class ControllerNotes extends Controller
 {
 
     public function show($id_user){
-
         return response()
             ->json(
                 Notes::where('id_user', $id_user)->join('matieres', 'notes.id_matiere', '=', 'matieres.id')
@@ -20,9 +19,15 @@ class ControllerNotes extends Controller
     }
 
     public function add(Request $request, $id_user){
+        $note = new Notes();
+        if($note::check($request) !== 'true')
+            return response()->json(['succeed'=>false, 'message'=>$note::check($request)]);
 
-       $note = new Notes();
-       $note->id_user = $id_user;
+        $machin = new Matieres();
+        if($machin->check($request -> matiere) !== 'true')
+            return response()->json(['succeed'=>false, 'message'=>$machin->check($request -> matiere)]);
+
+        $note->id_user = $id_user;
        $note->id_matiere = $request -> matiere;
        $note->coeff = $request -> coeff;
        $note->quotient = $request -> quotient;
@@ -46,6 +51,9 @@ class ControllerNotes extends Controller
     }
 
     public function update(Request $request, $id_note){
+        $note = new Notes();
+        if($note::check($request) !== 'true')
+            return response()->json(['succeed'=>false, 'message'=>$note::check($request)]);
 
         $note = Notes::where('id_note', $id_note)->update(
                        array(
@@ -64,12 +72,5 @@ class ControllerNotes extends Controller
 
     }
 
-    public function matieres(){
-        return response()
-            ->json(
-                Matieres::all(),
-                '200'
-            );
-    }
 
 }
