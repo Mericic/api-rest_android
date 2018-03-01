@@ -25,3 +25,5 @@ Route::post('/update/{id_note}', 'ControllerNotes@update')->where('id_note', '[0
 Route::get('/matieres', 'ControllerMatieres@show');
 Route::post('/matieres/add', 'ControllerMatieres@add');
 Route::get('/matieres/delete/{id_matiere}', 'ControllerMatieres@add')->where('id_matiere', '[0-9]+');
+Route::post('/connexion', 'ControllerConnexionYolo@connecteMoi');
+Route::post('/inscription', 'ControllerConnexionYolo@inscritMoi');
