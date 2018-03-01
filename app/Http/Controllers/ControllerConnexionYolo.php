@@ -12,7 +12,7 @@ class ControllerConnexionYolo extends Controller
         $id = $user::where('email', $request->email)->get();
         return response()
             ->json(
-                ['id_user' => $id[0]->id]
+                ['succeed'=>true,'id_user' => $id[0]->id]
             );
     }
 
@@ -31,7 +31,7 @@ class ControllerConnexionYolo extends Controller
         $id = $user::where('email', $request->email)->get();
         return response()
             ->json(
-                ['id_user' => $id[0]->id]
+                ['succeed'=>true,'id_user' => $id[0]->id]
             );
     }
 
