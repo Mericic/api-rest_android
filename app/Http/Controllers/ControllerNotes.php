@@ -54,6 +54,9 @@ class ControllerNotes extends Controller
         $note = new Notes();
         if($note::check($request) !== 'true')
             return response()->json(['succeed'=>false, 'message'=>$note::check($request)]);
+        $machin = new Matieres();
+        if($machin->check($request -> matiere) !== 'true')
+            return response()->json(['succeed'=>false, 'message'=>$machin->check($request -> matiere)]);
 
         $note = Notes::where('id_note', $id_note)->update(
                        array(
